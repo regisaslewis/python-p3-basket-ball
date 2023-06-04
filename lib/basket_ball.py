@@ -182,3 +182,81 @@ def game_dict():
             ]
         }
     }
+
+def num_points_per_game(name):
+    for n in game_dict()["home"]["players"]:
+        if n["name"] == name:
+            return n["points_per_game"]
+    for n in game_dict()["away"]["players"]:
+        if n["name"] == name:
+            return n["points_per_game"]
+
+def player_age(name):
+    for n in game_dict()["home"]["players"]:
+        if n["name"] == name:
+            return n["age"]
+    for n in game_dict()["away"]["players"]:
+        if n["name"] == name:
+            return n["age"]
+
+def team_colors(team):
+    if game_dict()["home"]["team_name"] == team:
+        return game_dict()["home"]["colors"]
+    else:
+        return game_dict()["away"]["colors"]
+
+def team_names():
+    names = []
+    names.append(game_dict()["home"]["team_name"])
+    names.append(game_dict()["away"]["team_name"])
+    return names
+
+def player_numbers(team):
+    if game_dict()["home"]["team_name"] == team:
+        return [n["number"] for n in game_dict()["home"]["players"]]
+    if game_dict()["away"]["team_name"] == team:
+        return [n["number"] for n in game_dict()["away"]["players"]]
+
+def player_stats(name):
+    for n in game_dict()["home"]["players"]:
+        if n["name"] == name:
+            return n
+    for n in game_dict()["away"]["players"]:
+        if n["name"] == name:
+            return n
+
+def average_rebounds_by_shoe_brand():
+    brand_dict = {
+        "Nike": [],
+        "Adidas": [],
+        "Puma": [],
+        "Jordan": [],
+    }
+    for n in game_dict()["home"]["players"]:
+        if n["shoe_brand"] == "Nike":
+            brand_dict["Nike"].append(n["rebounds_per_game"])
+    for n in game_dict()["home"]["players"]:
+        if n["shoe_brand"] == "Adidas":
+            brand_dict["Adidas"].append(n["rebounds_per_game"])
+    for n in game_dict()["home"]["players"]:
+        if n["shoe_brand"] == "Puma":
+            brand_dict["Puma"].append(n["rebounds_per_game"])
+    for n in game_dict()["home"]["players"]:
+        if n["shoe_brand"] == "Jordan":
+            brand_dict["Jordan"].append(n["rebounds_per_game"])
+    for n in game_dict()["away"]["players"]:
+        if n["shoe_brand"] == "Nike":
+            brand_dict["Nike"].append(n["rebounds_per_game"])
+    for n in game_dict()["away"]["players"]:
+        if n["shoe_brand"] == "Adidas":
+            brand_dict["Adidas"].append(n["rebounds_per_game"])
+    for n in game_dict()["away"]["players"]:
+        if n["shoe_brand"] == "Puma":
+            brand_dict["Puma"].append(n["rebounds_per_game"])
+    for n in game_dict()["away"]["players"]:
+        if n["shoe_brand"] == "Jordan":
+            brand_dict["Jordan"].append(n["rebounds_per_game"])
+    print("Nike:  " + "%.2f" % (sum(brand_dict["Nike"]) / len(brand_dict["Nike"])))
+    print("Adidas:  " + "%.2f" % (sum(brand_dict["Adidas"]) / len(brand_dict["Adidas"])))
+    print("Puma:  " + "%.2f" % (sum(brand_dict["Puma"]) / len(brand_dict["Puma"])))
+    print("Jordan:  " + "%.2f" % (sum(brand_dict["Jordan"]) / len(brand_dict["Jordan"])))
